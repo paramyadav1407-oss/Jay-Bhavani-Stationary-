@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jay Bhavani Stationery</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+    }
+
+    header {
+      background: #ff9933;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background: #333;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    section {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 10px;
+      background: white;
+    }
+
+    .btn {
+      background: #ff9933;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    input {
+      padding: 8px;
+      margin: 5px;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Jay Bhavani Stationery</h1>
+  <p>Your One-Stop Stationery Store in Ahmedabad</p>
+</header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#products">Products</a>
+</nav>
+
+<section id="home">
+  <h2>Welcome</h2>
+  <p>Serving Ghuma-Bopal Road with quality stationery.</p>
+</section>
+
+<section id="products">
+  <h2>Manage Products</h2>
+
+  <input type="text" id="name" placeholder="Product Name">
+  <input type="number" id="price" placeholder="Price">
+  <button class="btn" onclick="addProduct()">Add Product</button>
+
+  <h2>Product List</h2>
+  <div class="products" id="productList"></div>
+</section>
+
+<footer>
+  <p>© 2026 Jay Bhavani Stationery</p>
+</footer>
+
+<script>
+  let products = JSON.parse(localStorage.getItem('products')) || [];
+
+  function displayProducts() {
+    const list = document.getElementById('productList');
+    list.innerHTML = '';
+
+    products.forEach((product, index) => {
+      list.innerHTML += `
+        <div class="card">
+          <h3>${product.name}</h3>
+          <p>₹${product.price}</p>
+          <button class="btn" onclick="removeProduct(${index})">Remove</button>
+        </div>
+      `;
+    });
+  }
+
+  function addProduct() {
+    const name = document.getElementById('name').value;
+    const price = document.getElementById('price').value;
+
+    if (name === '' || price === '') {
+      alert('Enter all details');
+      return;
+    }
+
+    products.push({ name, price });
+    localStorage.setItem('products', JSON.stringify(products));
+
+    document.getElementById('name').value = '';
+    document.getElementById('price').value = '';
+
+    displayProducts();
+  }
+
+  function removeProduct(index) {
+    products.splice(index, 1);
+    localStorage.setItem('products', JSON.stringify(products));
+    displayProducts();
+  }
+
+  displayProducts();
+</script>
+
+</body>
+</html>
