@@ -1,91 +1,83 @@
-Create a premium, modern and professional business website for a stationery shop named "Jay Bhavani Stationery" located at Ghuma-Bopal Road, Ahmedabad, India.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jay Bhavani Stationery</title>
 
-The website should look like a real branded store (similar to small e-commerce websites like Amazon/Flipkart but simple).
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
-🎨 DESIGN REQUIREMENTS:
-- Clean, modern UI with orange/white theme
-- Use smooth animations (fade-in, hover effects)
-- Mobile responsive design (very important)
-- Sticky header and professional layout
-- Attractive hero section with tagline:
-  "Your One-Stop Shop for Creativity, Study & Office Needs"
+<style>
+body{margin:0;font-family:'Poppins',sans-serif;background:#f9f9f9;}
+header{background:#ff7a00;color:#fff;padding:15px;text-align:center;font-size:22px;font-weight:600;}
+.hero{background:linear-gradient(135deg,#ff7a00,#ffb347);color:#fff;text-align:center;padding:50px;}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:20px;}
+.card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.2);transition:0.3s;}
+.card:hover{transform:scale(1.05);}
+.card img{width:100%;height:150px;object-fit:cover;border-radius:8px;}
+.btn{background:#ff7a00;color:white;padding:8px;border:none;border-radius:5px;cursor:pointer;margin-top:8px;}
+.search{padding:10px;text-align:center;}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:12px;border-radius:50px;text-decoration:none;}
+</style>
+</head>
 
-🏪 BUSINESS DETAILS:
-- Show shop name clearly
-- Show phone number
-- Show location (Ghuma-Bopal Road, Ahmedabad)
-- Add customer trust elements (reviews, clean design)
+<body>
 
-📦 PRODUCT SYSTEM:
-- Add product management (add/remove products)
-- Fields:
-  - Product name
-  - Price
-  - Category
-  - Image
-- Display products in card layout
-- Add hover animation on cards
+<header>Jay Bhavani Stationery</header>
 
-📂 CATEGORIES:
-- Pen
-- Notebook
-- School
-- Office
-- Art Supplies
+<div class="hero">
+<h1>Your One-Stop Shop for Creativity, Study & Office Needs</h1>
+<p>Serving Ghuma-Bopal Road, Ahmedabad</p>
+<p><b>📞 Contact: +91 99999 99999</b></p>
+</div>
 
-Add:
-- Search bar (live search)
-- Category filter dropdown
+<div class="search">
+<input type="text" id="search" placeholder="Search products..." oninput="displayProducts()">
+</div>
 
-🛒 ORDER SYSTEM:
-- Add "Order on WhatsApp" button for each product
-- When clicked, it should open WhatsApp with message:
-  "I want to order [product name] for ₹[price]"
-- Add floating WhatsApp chat button
+<div class="products" id="productList"></div>
 
-⭐ EXTRA SECTIONS:
-- Hero section (top)
-- Product section
-- Customer reviews section (with 2–3 demo reviews)
-- Footer with contact info
+<a class="whatsapp" href="https://wa.me/919999999999" target="_blank">Chat</a>
 
-🖼️ DEMO PRODUCTS (IMPORTANT):
-Add 12–15 demo products by default (visible on load) with:
-- Realistic stationery names
-- Proper categories
-- Prices
-- High-quality placeholder images (use Unsplash)
+<script>
 
-Example products:
-- Classmate Notebook
-- Reynolds Pen Pack
-- Camlin Geometry Box
-- Highlighter Set
-- Sketch Pen Set
-- A4 Paper Pack
-- Stapler Machine
-- Glue Stick
-- Whiteboard Marker
-- Pencil Box
+let products = [
+{name:"Notebook",price:50,category:"Notebook",image:"https://images.unsplash.com/photo-1519681393784-d120267933ba"},
+{name:"Ball Pen",price:10,category:"Pen",image:"https://images.unsplash.com/photo-1583485088034-697b5bc54ccd"},
+{name:"Pencil Box",price:80,category:"School",image:"https://images.unsplash.com/photo-1603575449293-0f38c64c6b35"},
+{name:"Geometry Box",price:150,category:"School",image:"https://images.unsplash.com/photo-1588072432836-e10032774350"},
+{name:"Highlighter",price:30,category:"Pen",image:"https://images.unsplash.com/photo-1586953208448-b95a79798f07"},
+{name:"Sketch Pens",price:120,category:"Art",image:"https://images.unsplash.com/photo-1581093588401-16ec6d1b7b6b"},
+{name:"Marker",price:40,category:"Office",image:"https://images.unsplash.com/photo-1587614382346-ac79b55b3c5b"},
+{name:"Glue Stick",price:25,category:"Stationery",image:"https://images.unsplash.com/photo-1615484477201-9d3c78c3a62d"},
+{name:"Stapler",price:90,category:"Office",image:"https://images.unsplash.com/photo-1587613756398-ff8c1c5e1b0d"},
+{name:"A4 Sheets Pack",price:200,category:"Office",image:"https://images.unsplash.com/photo-1586281380349-632531db7ed4"},
+{name:"Crayons",price:70,category:"Art",image:"https://images.unsplash.com/photo-1581092334394-1f74e9bb0e8d"},
+{name:"Eraser",price:5,category:"Stationery",image:"https://images.unsplash.com/photo-1588776814546-ec7e2c8e8f87"}
+];
 
-Each product must have:
-- Image
-- Name
-- Price
-- Category
+function displayProducts(){
+let search=document.getElementById('search').value.toLowerCase();
+let list=document.getElementById('productList');
+list.innerHTML='';
 
-⚙️ FUNCTIONALITY:
-- Save products using localStorage
-- Products should persist after refresh
-- If no saved products → show default demo products
+products.forEach(p=>{
+if(p.name.toLowerCase().includes(search)){
+let msg=`I want to order ${p.name} for ₹${p.price}`;
+list.innerHTML+=`
+<div class="card">
+<img src="${p.image}">
+<h3>${p.name}</h3>
+<p>₹${p.price}</p>
+<button class="btn" onclick="window.open('https://wa.me/919999999999?text='+encodeURIComponent(msg))">Order</button>
+</div>`;
+}
+});
+}
 
-💬 WHATSAPP:
-- Use phone number format: 91XXXXXXXXXX
-- Auto message should include product name and price
+displayProducts();
 
-🚀 FINAL OUTPUT:
-- Provide complete working HTML, CSS, and JavaScript in one file
-- No external dependencies except fonts/images
-- Code should be clean and ready to deploy on GitHub Pages
+</script>
 
-Make it look like a REAL business website that can impress customers and shop owners.
+</body>
+</html>
