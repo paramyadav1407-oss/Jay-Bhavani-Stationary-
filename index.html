@@ -42,7 +42,9 @@ header{background:#ff7a00;color:#fff;padding:15px;text-align:center;font-size:22
 <div class="products" id="productList"></div>
 
 <a class="whatsapp" href="https://wa.me/919999999999" target="_blank">Chat</a>
+let isOwner = false;
 
+// change to true only when YOU want to edit
 <script>
 
 let defaultProducts = [
@@ -70,7 +72,7 @@ list.innerHTML+=`
 <h3>${p.name}</h3>
 <p>₹${p.price}</p>
 <p>${p.category}</p>
-<button class="btn" onclick="removeProduct(${i})">Remove</button>
+${isOwner ? `<button class="btn" onclick="removeProduct(${i})">Remove</button>` : ""}
 <button class="btn" onclick="orderProduct('${p.name}',${p.price})">Order</button>
 </div>`;
 }
