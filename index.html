@@ -51,8 +51,82 @@
 </footer><a class="whatsapp" href="https://wa.me/919999999999" target="_blank">Chat</a>
 
 <script>
-let products = JSON.parse(localStorage.getItem('products')) || [];
+let defaultProducts = [
+  {
+    name: "Ball Pen",
+    price: 10,
+    category: "Pen",
+    image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd"
+  },
+  {
+    name: "Notebook",
+    price: 50,
+    category: "Notebook",
+    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba"
+  },
+  {
+    name: "Pencil",
+    price: 5,
+    category: "Stationery",
+    image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338"
+  },
+  {
+    name: "Eraser",
+    price: 5,
+    category: "Stationery",
+    image: "https://images.unsplash.com/photo-1588776814546-ec7e2c8e8f87"
+  },
+  {
+    name: "Sharpener",
+    price: 10,
+    category: "Stationery",
+    image: "https://images.unsplash.com/photo-1616627984504-9a9f0bb4c4c7"
+  },
+  {
+    name: "Highlighter",
+    price: 30,
+    category: "Pen",
+    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07"
+  },
+  {
+    name: "Sketch Pen Set",
+    price: 120,
+    category: "Art",
+    image: "https://images.unsplash.com/photo-1581093588401-16ec6d1b7b6b"
+  },
+  {
+    name: "Geometry Box",
+    price: 150,
+    category: "School",
+    image: "https://images.unsplash.com/photo-1588072432836-e10032774350"
+  },
+  {
+    name: "Glue Stick",
+    price: 25,
+    category: "Stationery",
+    image: "https://images.unsplash.com/photo-1615484477201-9d3c78c3a62d"
+  },
+  {
+    name: "Marker",
+    price: 40,
+    category: "Pen",
+    image: "https://images.unsplash.com/photo-1587614382346-ac79b55b3c5b"
+  },
+  {
+    name: "A4 Sheets Pack",
+    price: 200,
+    category: "Office",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4"
+  },
+  {
+    name: "Stapler",
+    price: 80,
+    category: "Office",
+    image: "https://images.unsplash.com/photo-1587613756398-ff8c1c5e1b0d"
+  }
+];
 
+let products = JSON.parse(localStorage.getItem('products')) || defaultProducts;
 function updateCategories(){
   const filter = document.getElementById('filter');
   let categories = [...new Set(products.map(p=>p.category))];
