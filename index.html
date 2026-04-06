@@ -34,34 +34,34 @@ header{background:#ff7a00;color:#fff;padding:15px;text-align:center;font-size:22
 <div class="search">
 <input type="text" id="search" placeholder="Search products..." oninput="displayProducts()">
 </div>
-
+<input type="text" id="name" placeholder="Product Name">
+<input type="number" id="price" placeholder="Price">
+<input type="text" id="category" placeholder="Category">
+<input type="file" id="image">
+<button onclick="addProduct()" class="btn">Add Product</button>
 <div class="products" id="productList"></div>
 
 <a class="whatsapp" href="https://wa.me/919999999999" target="_blank">Chat</a>
 
 <script>
 
-let products = [
-{name:"Notebook",price:50,category:"Notebook",image:"https://images.unsplash.com/photo-1519681393784-d120267933ba"},
-{name:"Ball Pen",price:10,category:"Pen",image:"https://images.unsplash.com/photo-1583485088034-697b5bc54ccd"},
-{name:"Pencil Box",price:80,category:"School",image:"https://images.unsplash.com/photo-1603575449293-0f38c64c6b35"},
-{name:"Geometry Box",price:150,category:"School",image:"https://images.unsplash.com/photo-1588072432836-e10032774350"},
-{name:"Highlighter",price:30,category:"Pen",image:"https://images.unsplash.com/photo-1586953208448-b95a79798f07"},
-{name:"Sketch Pens",price:120,category:"Art",image:"https://images.unsplash.com/photo-1581093588401-16ec6d1b7b6b"},
-{name:"Marker",price:40,category:"Office",image:"https://images.unsplash.com/photo-1587614382346-ac79b55b3c5b"},
-{name:"Glue Stick",price:25,category:"Stationery",image:"https://images.unsplash.com/photo-1615484477201-9d3c78c3a62d"},
-{name:"Stapler",price:90,category:"Office",image:"https://images.unsplash.com/photo-1587613756398-ff8c1c5e1b0d"},
-{name:"A4 Sheets Pack",price:200,category:"Office",image:"https://images.unsplash.com/photo-1586281380349-632531db7ed4"},
-{name:"Crayons",price:70,category:"Art",image:"https://images.unsplash.com/photo-1581092334394-1f74e9bb0e8d"},
-{name:"Eraser",price:5,category:"Stationery",image:"https://images.unsplash.com/photo-1588776814546-ec7e2c8e8f87"}
+let defaultProducts = [
+{name:"Notebook",price:50,category:"Notebook",image:"https://images.unsplash.com/photo-1519681393784-d120267933ba?w=500"},
+{name:"Ball Pen",price:10,category:"Pen",image:"https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500"},
+{name:"Pencil Box",price:80,category:"School",image:"https://images.unsplash.com/photo-1603575449293-0f38c64c6b35?w=500"},
+{name:"Geometry Box",price:150,category:"School",image:"https://images.unsplash.com/photo-1588072432836-e10032774350?w=500"},
+{name:"Highlighter",price:30,category:"Pen",image:"https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=500"},
+{name:"Sketch Pens",price:120,category:"Art",image:"https://images.unsplash.com/photo-1581093588401-16ec6d1b7b6b?w=500"}
 ];
 
+let products = JSON.parse(localStorage.getItem('products')) || defaultProducts;
+
 function displayProducts(){
-let search=document.getElementById('search').value.toLowerCase();
 let list=document.getElementById('productList');
+let search=document.getElementById('search').value.toLowerCase();
 list.innerHTML='';
 
-products.forEach(p=>{
+products.forEach((p,i)=>{
 if(p.name.toLowerCase().includes(search)){
 let msg=`I want to order ${p.name} for ₹${p.price}`;
 list.innerHTML+=`
@@ -69,15 +69,50 @@ list.innerHTML+=`
 <img src="${p.image}">
 <h3>${p.name}</h3>
 <p>₹${p.price}</p>
-<button class="btn" onclick="window.open('https://wa.me/919999999999?text='+encodeURIComponent(msg))">Order</button>
+<p>${p.category}</p>
+<button class="btn" onclick="removeProduct(${i})">Remove</button>
+<button class="btn" onclick="orderProduct('${p.name}',${p.price})">Order</button>
 </div>`;
 }
 });
 }
 
+function addProduct(){
+let name=document.getElementById('name').value;
+let price=document.getElementById('price').value;
+let category=document.getElementById('category').value;
+let file=document.getElementById('image').files[0];
+
+if(!name||!price||!category||!file){alert('Fill all fields');return;}
+
+let reader=new FileReader();
+reader.onload=function(e){
+products.push({name,price,category,image:e.target.result});
+localStorage.setItem('products',JSON.stringify(products));
+displayProducts();
+}
+reader.readAsDataURL(file);
+
+document.getElementById('name').value='';
+document.getElementById('price').value='';
+document.getElementById('category').value='';
+document.getElementById('image').value='';
+}
+
+function removeProduct(i){
+products.splice(i,1);
+localStorage.setItem('products',JSON.stringify(products));
+displayProducts();
+}
+
+function orderProduct(name,price){
+let msg=`I want to order ${name} for ₹${price}`;
+window.open('https://wa.me/919999999999?text='+encodeURIComponent(msg));
+}
+
 displayProducts();
 
-</script>
+  </script>
 
 </body>
 </html>
