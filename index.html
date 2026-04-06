@@ -1,194 +1,91 @@
-<!DOCTYPE html><html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jay Bhavani Stationery</title><style>
-  body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(to right,#fff7f0,#ffe4cc);} 
-  header{background:linear-gradient(135deg,#ff7a00,#ffb347);color:white;padding:25px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,0.2);} 
-  nav{display:flex;justify-content:center;gap:25px;background:#222;padding:12px;} 
-  nav a{color:white;text-decoration:none;font-weight:bold;} 
-  section{padding:30px;text-align:center;} 
-  .hero{font-size:20px;font-weight:bold;animation:fadeIn 2s;} 
+Create a premium, modern and professional business website for a stationery shop named "Jay Bhavani Stationery" located at Ghuma-Bopal Road, Ahmedabad, India.
 
-  @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+The website should look like a real branded store (similar to small e-commerce websites like Amazon/Flipkart but simple).
 
-  input,select{padding:8px;margin:5px;border-radius:5px;border:1px solid #ccc;} 
+🎨 DESIGN REQUIREMENTS:
+- Clean, modern UI with orange/white theme
+- Use smooth animations (fade-in, hover effects)
+- Mobile responsive design (very important)
+- Sticky header and professional layout
+- Attractive hero section with tagline:
+  "Your One-Stop Shop for Creativity, Study & Office Needs"
 
-  .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;} 
-  .card{background:white;border-radius:15px;padding:15px;box-shadow:0 5px 15px rgba(0,0,0,0.15);transition:0.3s;} 
-  .card:hover{transform:scale(1.05);} 
-  .card img{width:100%;height:160px;object-fit:cover;border-radius:10px;} 
+🏪 BUSINESS DETAILS:
+- Show shop name clearly
+- Show phone number
+- Show location (Ghuma-Bopal Road, Ahmedabad)
+- Add customer trust elements (reviews, clean design)
 
-  .btn{background:#ff7a00;color:white;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;margin:5px;} 
+📦 PRODUCT SYSTEM:
+- Add product management (add/remove products)
+- Fields:
+  - Product name
+  - Price
+  - Category
+  - Image
+- Display products in card layout
+- Add hover animation on cards
 
-  footer{background:#222;color:white;text-align:center;padding:15px;} 
+📂 CATEGORIES:
+- Pen
+- Notebook
+- School
+- Office
+- Art Supplies
 
-  .whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:12px 15px;border-radius:50px;text-decoration:none;font-weight:bold;box-shadow:0 4px 10px rgba(0,0,0,0.3);} 
-</style></head><body><header>
-  <h1>Jay Bhavani Stationery</h1>
-  <p>Serving Ghuma-Bopal Road, Ahmedabad</p>
-</header><nav>
-  <a href="#home">Home</a>
-  <a href="#products">Products</a>
-</nav><section id="home">
-  <p class="hero">✨ Your One-Stop Shop for Creativity, Study & Office Needs ✨</p>
-  <p>Premium quality stationery at affordable prices.</p>
-  <p><b>📞 Contact: +91 99999 99999</b></p>
-</section><section id="products">
-  <h2>Manage Products</h2>  <input type="text" id="name" placeholder="Product Name">
-  <input type="number" id="price" placeholder="Price">
-  <input type="text" id="category" placeholder="Category (e.g. Pen, Notebook)">
-  <input type="file" id="image" accept="image/*">
-  <button class="btn" onclick="addProduct()">Add Product</button>  <div>
-    <input type="text" id="search" placeholder="Search" oninput="displayProducts()">
-    <select id="filter" onchange="displayProducts()">
-      <option value="">All Categories</option>
-    </select>
-  </div>  <h2>Our Products</h2>
-  <div class="products" id="productList"></div>
-</section><footer>
-  <p>© 2026 Jay Bhavani Stationery</p>
-</footer><a class="whatsapp" href="https://wa.me/919999999999" target="_blank">Chat</a>
+Add:
+- Search bar (live search)
+- Category filter dropdown
 
-<script>
-let defaultProducts = [
-  {
-    name: "Ball Pen",
-    price: 10,
-    category: "Pen",
-    image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd"
-  },
-  {
-    name: "Notebook",
-    price: 50,
-    category: "Notebook",
-    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba"
-  },
-  {
-    name: "Pencil",
-    price: 5,
-    category: "Stationery",
-    image: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338"
-  },
-  {
-    name: "Eraser",
-    price: 5,
-    category: "Stationery",
-    image: "https://images.unsplash.com/photo-1588776814546-ec7e2c8e8f87"
-  },
-  {
-    name: "Sharpener",
-    price: 10,
-    category: "Stationery",
-    image: "https://images.unsplash.com/photo-1616627984504-9a9f0bb4c4c7"
-  },
-  {
-    name: "Highlighter",
-    price: 30,
-    category: "Pen",
-    image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07"
-  },
-  {
-    name: "Sketch Pen Set",
-    price: 120,
-    category: "Art",
-    image: "https://images.unsplash.com/photo-1581093588401-16ec6d1b7b6b"
-  },
-  {
-    name: "Geometry Box",
-    price: 150,
-    category: "School",
-    image: "https://images.unsplash.com/photo-1588072432836-e10032774350"
-  },
-  {
-    name: "Glue Stick",
-    price: 25,
-    category: "Stationery",
-    image: "https://images.unsplash.com/photo-1615484477201-9d3c78c3a62d"
-  },
-  {
-    name: "Marker",
-    price: 40,
-    category: "Pen",
-    image: "https://images.unsplash.com/photo-1587614382346-ac79b55b3c5b"
-  },
-  {
-    name: "A4 Sheets Pack",
-    price: 200,
-    category: "Office",
-    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4"
-  },
-  {
-    name: "Stapler",
-    price: 80,
-    category: "Office",
-    image: "https://images.unsplash.com/photo-1587613756398-ff8c1c5e1b0d"
-  }
-];
+🛒 ORDER SYSTEM:
+- Add "Order on WhatsApp" button for each product
+- When clicked, it should open WhatsApp with message:
+  "I want to order [product name] for ₹[price]"
+- Add floating WhatsApp chat button
 
-let products = JSON.parse(localStorage.getItem('products')) || defaultProducts;
-function updateCategories(){
-  const filter = document.getElementById('filter');
-  let categories = [...new Set(products.map(p=>p.category))];
-  filter.innerHTML = '<option value="">All Categories</option>';
-  categories.forEach(c=>{
-    filter.innerHTML += `<option value="${c}">${c}</option>`;
-  });
-}
+⭐ EXTRA SECTIONS:
+- Hero section (top)
+- Product section
+- Customer reviews section (with 2–3 demo reviews)
+- Footer with contact info
 
-function displayProducts(){
-  const list = document.getElementById('productList');
-  const search = document.getElementById('search').value.toLowerCase();
-  const filter = document.getElementById('filter').value;
-  list.innerHTML = '';
+🖼️ DEMO PRODUCTS (IMPORTANT):
+Add 12–15 demo products by default (visible on load) with:
+- Realistic stationery names
+- Proper categories
+- Prices
+- High-quality placeholder images (use Unsplash)
 
-  products.forEach((p,i)=>{
-    if(p.name.toLowerCase().includes(search) && (filter==='' || p.category===filter)){
-      let msg = `I want to order ${p.name} for ₹${p.price}`;
-      list.innerHTML += `
-      <div class="card">
-        <img src="${p.image}">
-        <h3>${p.name}</h3>
-        <p>₹${p.price}</p>
-        <p>${p.category}</p>
-        <button class="btn" onclick="removeProduct(${i})">Remove</button>
-        <a class="btn" href="https://wa.me/919999999999?text=${encodeURIComponent(msg)}" target="_blank">Order</a>
-      </div>`;
-    }
-  });
-}
+Example products:
+- Classmate Notebook
+- Reynolds Pen Pack
+- Camlin Geometry Box
+- Highlighter Set
+- Sketch Pen Set
+- A4 Paper Pack
+- Stapler Machine
+- Glue Stick
+- Whiteboard Marker
+- Pencil Box
 
-function addProduct(){
-  const name = document.getElementById('name').value;
-  const price = document.getElementById('price').value;
-  const category = document.getElementById('category').value;
-  const file = document.getElementById('image').files[0];
+Each product must have:
+- Image
+- Name
+- Price
+- Category
 
-  if(!name||!price||!category||!file){alert('Fill all');return;}
+⚙️ FUNCTIONALITY:
+- Save products using localStorage
+- Products should persist after refresh
+- If no saved products → show default demo products
 
-  const reader = new FileReader();
-  reader.onload = function(e){
-    products.push({name,price,category,image:e.target.result});
-    localStorage.setItem('products',JSON.stringify(products));
-    updateCategories();
-    displayProducts();
-  }
-  reader.readAsDataURL(file);
+💬 WHATSAPP:
+- Use phone number format: 91XXXXXXXXXX
+- Auto message should include product name and price
 
-  document.getElementById('name').value='';
-  document.getElementById('price').value='';
-  document.getElementById('category').value='';
-  document.getElementById('image').value='';
-}
+🚀 FINAL OUTPUT:
+- Provide complete working HTML, CSS, and JavaScript in one file
+- No external dependencies except fonts/images
+- Code should be clean and ready to deploy on GitHub Pages
 
-function removeProduct(i){
-  products.splice(i,1);
-  localStorage.setItem('products',JSON.stringify(products));
-  updateCategories();
-  displayProducts();
-}
-
-updateCategories();
-displayProducts();
-</script></body>
-</html>
+Make it look like a REAL business website that can impress customers and shop owners.
